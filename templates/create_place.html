@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Place</title>
+</head>
+<body>
+  <h2>Create New Place</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+        {{ message }}
+      </p>
+    {% endfor %}
+  {% endif %}
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Name" required><br><br>
+    <input type="text" name="wheather" placeholder="Weather" required><br><br>
+    <input type="text" name="state" placeholder="State" required><br><br>
+    <input type="text" name="district" placeholder="District" required><br><br>
+    <input type="text" name="googlemaplink" placeholder="Google Map Link" required><br><br>
+    <input type="file" name="images" multiple><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+  <h2>All Places</h2>
+  {% for place in places %}
+    <div style="border: 1px solid #aaa; padding: 10px; margin-bottom: 10px;">
+      <h3>{{ place.name }}</h3>
+      <p><strong>Weather:</strong> {{ place.wheather }}</p>
+      <p><strong>State:</strong> {{ place.state }}</p>
+      <p><strong>District:</strong> {{ place.district }}</p>
+      <p><strong>Map:</strong> <a href="{{ place.googlemaplink }}" target="_blank">{{ place.googlemaplink }}</a></p>
+     
+    <div style="padding: 10px; margin-bottom: 10px;">
+    <!-- ... other fields ... -->
+
+    <form method="POST" action="{% url 'delete-place-form' place.id %}" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" onclick="return confirm('Are you sure?');">Delete</button>
+    </form>
+  </div>
+
+      {% if place.image_list %}
+            {% for img in place.image_list %}
+                <img src="{{ img.image }}" width="150">
+            {% endfor %}
+      {% endif %}
+
+       </div>
+    
+  {% endfor %}
+</body>
+</html>

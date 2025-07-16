@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>Update Place</title></head>
+<body>
+  <h2>Update Place</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+        {{ message }}
+      </p>
+    {% endfor %}
+  {% endif %}
+
+  <form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Name" value="{{ place.name }}" required><br><br>
+    <input type="text" name="wheather" placeholder="Weather" value="{{ place.wheather }}" required><br><br>
+    <input type="text" name="state" placeholder="State" value="{{ place.state }}" required><br><br>
+    <input type="text" name="district" placeholder="District" value="{{ place.district }}" required><br><br>
+    <input type="text" name="googlemaplink" placeholder="Google Map Link" value="{{ place.googlemaplink }}" required><br><br>
+
+    <button type="submit">Update</button>
+  </form>
+</body>
+</html>
