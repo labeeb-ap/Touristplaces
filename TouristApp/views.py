@@ -127,7 +127,7 @@ def update_place_view(request, pk):
 def delete_place_view(request, pk):
     if request.method == 'POST':
         try:
-            api_url = f'http://127.0.0.1:8000/api/{pk}/delete'
+            api_url = f'{API_url}/api/{pk}/delete'
             response = requests.delete(api_url)
             if response.status_code == 204:
                 messages.success(request, 'Place deleted successfully.')
