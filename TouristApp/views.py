@@ -5,7 +5,7 @@ from .serializers import PlacesSerializer
 from django.shortcuts import render
 import requests
 from django.contrib import messages
-API_url = 'touristplaces-tk1m.onrender.com/api'
+API_url = 'https://touristplaces-tk1m.onrender.com/api/create/api'
 
 # Django REST framework core imports
 from rest_framework.decorators import api_view, permission_classes
